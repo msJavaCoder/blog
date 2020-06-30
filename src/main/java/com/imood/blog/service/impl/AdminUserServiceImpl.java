@@ -5,12 +5,10 @@ import com.imood.blog.mapper.AdminUserMapper;
 import com.imood.blog.service.AdminUserService;
 import com.imood.blog.util.MD5Util;
 import org.springframework.stereotype.Service;
-import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
-import java.nio.charset.StandardCharsets;
 
-@Service
+@Service("adminUserService")
 public class AdminUserServiceImpl implements AdminUserService {
 
     @Resource
