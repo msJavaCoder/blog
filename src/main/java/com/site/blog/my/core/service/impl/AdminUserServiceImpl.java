@@ -16,9 +16,8 @@ public class AdminUserServiceImpl implements AdminUserService {
 
     @Override
     public AdminUser login(String userName, String password) {
-      /*  String passwordMd5 = MD5Util.MD5Encode(password, "UTF-8");*/
+        //将登录页的密码进行md5加密，因为数据库存的是MD5加密过的明文
         String passwordMd5 = MD5Util.MD5Encode(password, "UTF-8");
-        System.out.println(passwordMd5);
         return adminUserMapper.login(userName, passwordMd5);
     }
 
@@ -33,6 +32,7 @@ public class AdminUserServiceImpl implements AdminUserService {
         AdminUser adminUser = adminUserMapper.selectByPrimaryKey(loginUserId);
         //当前用户非空才可以进行更改
         if (adminUser != null) {
+            //将登录页的密码进行md5加密，因为数据库存的是MD5加密过的明文
             String originalPasswordMd5 = MD5Util.MD5Encode(originalPassword, "UTF-8");
             String newPasswordMd5 = MD5Util.MD5Encode(newPassword, "UTF-8");
             //比较原密码是否正确

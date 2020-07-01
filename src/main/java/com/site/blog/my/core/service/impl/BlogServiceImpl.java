@@ -1,5 +1,6 @@
 package com.site.blog.my.core.service.impl;
 
+import com.site.blog.my.core.config.Constants;
 import com.site.blog.my.core.controller.vo.BlogDetailVO;
 import com.site.blog.my.core.controller.vo.BlogListVO;
 import com.site.blog.my.core.controller.vo.SimpleBlogListVO;
@@ -88,7 +89,7 @@ public class BlogServiceImpl implements BlogService {
                 blogTagRelations.add(blogTagRelation);
             }
             if (blogTagRelationMapper.batchInsert(blogTagRelations) > 0) {
-                return "success";
+                return Constants.SUCCESS;
             }
         }
         return "保存失败";

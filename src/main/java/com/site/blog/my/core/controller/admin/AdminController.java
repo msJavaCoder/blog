@@ -98,7 +98,6 @@ public class AdminController {
         if (adminUser == null) {
             return "admin/login";
         }
-
         request.setAttribute("path", "profile");
         request.setAttribute("loginUserName", adminUser.getLoginUserName());
         request.setAttribute("nickName", adminUser.getNickName());
@@ -126,7 +125,7 @@ public class AdminController {
             request.getSession().removeAttribute("loginUserId");
             request.getSession().removeAttribute("loginUser");
             request.getSession().removeAttribute("errorMsg");
-            return "success";
+            return "修改成功";
         } else {
             return "修改失败";
         }
@@ -148,7 +147,7 @@ public class AdminController {
         }
         Integer loginUserId = (int) request.getSession().getAttribute("loginUserId");
         if (adminUserService.updateName(loginUserId, loginUserName, nickName)) {
-            return "success";
+            return "修改成功";
         } else {
             return "修改失败";
         }
@@ -166,6 +165,7 @@ public class AdminController {
         request.getSession().removeAttribute("loginUserId");
         request.getSession().removeAttribute("loginUser");
         request.getSession().removeAttribute("errorMsg");
+        //返回登录页面
         return "admin/login";
     }
 
