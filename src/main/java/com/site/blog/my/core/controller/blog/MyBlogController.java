@@ -25,6 +25,7 @@ public class MyBlogController {
 
     /**
      * 首页(取第一页数据)
+     *
      * @return
      */
     @GetMapping({"/", "/index", "index.html"})
@@ -34,6 +35,7 @@ public class MyBlogController {
 
     /**
      * 首页 分页数据
+     *
      * @return
      */
     @GetMapping({"/page/{pageNum}"})
@@ -52,6 +54,7 @@ public class MyBlogController {
 
     /**
      * 搜索列表页
+     *
      * @return
      */
     @GetMapping({"/search/{keyword}"})
@@ -61,6 +64,7 @@ public class MyBlogController {
 
     /**
      * 搜索列表页
+     *
      * @return
      */
     @GetMapping({"/search/{keyword}/{page}"})
@@ -75,6 +79,7 @@ public class MyBlogController {
 
     /**
      * 标签列表页
+     *
      * @return
      */
     @GetMapping({"/tag/{tagName}"})
@@ -84,6 +89,7 @@ public class MyBlogController {
 
     /**
      * 标签列表页
+     *
      * @return
      */
     @GetMapping({"/tag/{tagName}/{page}"})
@@ -98,6 +104,7 @@ public class MyBlogController {
 
     /**
      * 分类列表页
+     *
      * @return
      */
     @GetMapping({"/category/{categoryName}"})
@@ -107,6 +114,7 @@ public class MyBlogController {
 
     /**
      * 分类列表页
+     *
      * @return
      */
     @GetMapping({"/category/{categoryName}/{page}"})
@@ -121,6 +129,7 @@ public class MyBlogController {
 
     /**
      * 详情页
+     *
      * @return
      */
     @GetMapping("/blog/{blogId}")

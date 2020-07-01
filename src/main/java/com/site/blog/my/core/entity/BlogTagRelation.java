@@ -3,11 +3,6 @@ package com.site.blog.my.core.entity;
 import lombok.Data;
 
 import java.util.Date;
-/**
- * @description:
- * @author: 微信公众号：码上Java
- * @version: 1.0
- */
 @Data
 public class BlogTagRelation {
     private Long relationId;

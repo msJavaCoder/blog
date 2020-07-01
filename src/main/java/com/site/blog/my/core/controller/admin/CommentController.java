@@ -20,12 +20,6 @@ public class CommentController {
     @Resource
     private CommentService commentService;
 
-    @GetMapping("/comments")
-    public String list(HttpServletRequest request) {
-        request.setAttribute("path", "comments");
-        return "admin/comment";
-    }
-
     /**
      * 评论列表
      */
@@ -77,6 +71,12 @@ public class CommentController {
         } else {
             return ResultGenerator.genFailResult("刪除失败");
         }
+    }
+
+    @GetMapping("/comments")
+    public String list(HttpServletRequest request) {
+        request.setAttribute("path", "comments");
+        return "admin/comment";
     }
 
 

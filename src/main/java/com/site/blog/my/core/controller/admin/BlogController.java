@@ -1,9 +1,7 @@
 package com.site.blog.my.core.controller.admin;
 
 import com.site.blog.my.core.config.Constants;
-import com.site.blog.my.core.entity.AdminUser;
 import com.site.blog.my.core.entity.Blog;
-import com.site.blog.my.core.service.AdminUserService;
 import com.site.blog.my.core.service.BlogService;
 import com.site.blog.my.core.service.CategoryService;
 import com.site.blog.my.core.util.MyBlogUtils;
@@ -36,32 +34,14 @@ public class BlogController {
     private CategoryService categoryService;
     @Resource
     private BlogService blogService;
-    @Resource
-    private AdminUserService adminUserService;
-    /**
-     * 页面跳转
-     * @param request
-     * @return
-     */
+
     @GetMapping("/blogs")
     public String list(HttpServletRequest request) {
-        //先到session 中取出这个用户id
-        Integer loginUserId = (int) request.getSession().getAttribute("loginUserId");
-        //到数据库中查找这个用户，如果不存在，则需要先登录
-        AdminUser adminUser = adminUserService.getUserDetailById(loginUserId);
-        if (adminUser == null) {
-            return "admin/login";
-        }
         request.setAttribute("path", "blogs");
         return "admin/blog";
     }
 
-    /**
-     *  文章列表
-     * @param params  分页参数 page limit
-     * @return
-     */
-        @GetMapping("/blogs/list")
+    @GetMapping("/blogs/list")
     @ResponseBody
     public Result list(@RequestParam Map<String, Object> params) {
         if (StringUtils.isEmpty(params.get("page")) || StringUtils.isEmpty(params.get("limit"))) {
@@ -71,11 +51,6 @@ public class BlogController {
         return ResultGenerator.genSuccessResult(blogService.getBlogsPage(pageUtil));
     }
 
-    /**
-     * 文章编辑
-     * @param request
-     * @return
-     */
     @GetMapping("/blogs/edit")
     public String edit(HttpServletRequest request) {
         request.setAttribute("path", "edit");
@@ -83,12 +58,6 @@ public class BlogController {
         return "admin/edit";
     }
 
-    /**
-     *   根据文章id编辑文章
-     * @param request
-     * @param blogId
-     * @return
-     */
     @GetMapping("/blogs/edit/{blogId}")
     public String edit(HttpServletRequest request, @PathVariable("blogId") Long blogId) {
         request.setAttribute("path", "edit");
@@ -101,18 +70,6 @@ public class BlogController {
         return "admin/edit";
     }
 
-    /**
-     *  发布文章
-     * @param blogTitle
-     * @param blogSubUrl
-     * @param blogCategoryId
-     * @param blogTags
-     * @param blogContent
-     * @param blogCoverImage
-     * @param blogStatus
-     * @param enableComment
-     * @return
-     */
     @PostMapping("/blogs/save")
     @ResponseBody
     public Result save(@RequestParam("blogTitle") String blogTitle,
@@ -157,7 +114,7 @@ public class BlogController {
         blog.setBlogStatus(blogStatus);
         blog.setEnableComment(enableComment);
         String saveBlogResult = blogService.saveBlog(blog);
-        if (Constants.SUCCESS.equals(saveBlogResult)) {
+        if ("success".equals(saveBlogResult)) {
             return ResultGenerator.genSuccessResult("添加成功");
         } else {
             return ResultGenerator.genFailResult(saveBlogResult);
@@ -250,29 +207,23 @@ public class BlogController {
         blog.setBlogStatus(blogStatus);
         blog.setEnableComment(enableComment);
         String updateBlogResult = blogService.updateBlog(blog);
-        if (Constants.SUCCESS.equals(updateBlogResult)) {
+        if ("success".equals(updateBlogResult)) {
             return ResultGenerator.genSuccessResult("修改成功");
         } else {
             return ResultGenerator.genFailResult(updateBlogResult);
         }
     }
 
-    /**
-     * 批量删除文章   根据文章  ids
-     * @param ids
-     * @return
-     */
     @PostMapping("/blogs/delete")
     @ResponseBody
     public Result delete(@RequestBody Integer[] ids) {
-        //如果ids长度小于1，则说明没有勾选
         if (ids.length < 1) {
-            return ResultGenerator.genFailResult("请选中要删除的文章");
+            return ResultGenerator.genFailResult("参数异常！");
         }
         if (blogService.deleteBatch(ids)) {
             return ResultGenerator.genSuccessResult();
         } else {
-            return ResultGenerator.genFailResult("文章删除失败");
+            return ResultGenerator.genFailResult("删除失败");
         }
     }
 

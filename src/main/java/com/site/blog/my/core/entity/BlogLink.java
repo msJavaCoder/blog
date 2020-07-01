@@ -4,11 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.util.Date;
-/**
- * @description:
- * @author: 微信公众号：码上Java
- * @version: 1.0
- */
+
 @Data
 public class BlogLink {
     private Integer linkId;
