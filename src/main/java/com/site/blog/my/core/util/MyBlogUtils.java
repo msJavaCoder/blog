@@ -4,9 +4,6 @@ import org.springframework.util.StringUtils;
 
 import java.net.URI;
 
-/**
- * @author 13
- */
 public class MyBlogUtils {
 
     public static URI getHost(URI uri) {
