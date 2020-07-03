@@ -6,6 +6,7 @@ import lombok.Data;
 import java.util.Date;
 @Data
 public class BlogCategory {
+
     private Integer categoryId;
 
     private String categoryName;

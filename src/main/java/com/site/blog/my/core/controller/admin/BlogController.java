@@ -35,22 +35,38 @@ public class BlogController {
     @Resource
     private BlogService blogService;
 
+    /**
+     * 页面跳转
+     * @param request
+     * @return
+     */
     @GetMapping("/blogs")
     public String list(HttpServletRequest request) {
         request.setAttribute("path", "blogs");
         return "admin/blog";
     }
 
+    /**
+     * 文章列表
+     * @param params
+     * @return
+     */
     @GetMapping("/blogs/list")
     @ResponseBody
     public Result list(@RequestParam Map<String, Object> params) {
         if (StringUtils.isEmpty(params.get("page")) || StringUtils.isEmpty(params.get("limit"))) {
             return ResultGenerator.genFailResult("参数异常！");
         }
+        //分页
         PageQueryUtil pageUtil = new PageQueryUtil(params);
         return ResultGenerator.genSuccessResult(blogService.getBlogsPage(pageUtil));
     }
 
+    /**
+     * 文章编辑
+     * @param request
+     * @return
+     */
     @GetMapping("/blogs/edit")
     public String edit(HttpServletRequest request) {
         request.setAttribute("path", "edit");
@@ -58,6 +74,13 @@ public class BlogController {
         return "admin/edit";
     }
 
+
+    /**
+     * 根据文章id编辑文章
+     * @param request
+     * @param blogId
+     * @return
+     */
     @GetMapping("/blogs/edit/{blogId}")
     public String edit(HttpServletRequest request, @PathVariable("blogId") Long blogId) {
         request.setAttribute("path", "edit");
@@ -70,6 +93,18 @@ public class BlogController {
         return "admin/edit";
     }
 
+    /**
+     * 保存文章
+     * @param blogTitle
+     * @param blogSubUrl
+     * @param blogCategoryId
+     * @param blogTags
+     * @param blogContent
+     * @param blogCoverImage
+     * @param blogStatus
+     * @param enableComment
+     * @return
+     */
     @PostMapping("/blogs/save")
     @ResponseBody
     public Result save(@RequestParam("blogTitle") String blogTitle,
@@ -114,7 +149,7 @@ public class BlogController {
         blog.setBlogStatus(blogStatus);
         blog.setEnableComment(enableComment);
         String saveBlogResult = blogService.saveBlog(blog);
-        if ("success".equals(saveBlogResult)) {
+        if (Constants.SUCCESS.equals(saveBlogResult)) {
             return ResultGenerator.genSuccessResult("添加成功");
         } else {
             return ResultGenerator.genFailResult(saveBlogResult);
@@ -160,7 +195,19 @@ public class BlogController {
         }
     }
 
-
+    /**
+     * 更新文章
+     * @param blogId
+     * @param blogTitle
+     * @param blogSubUrl
+     * @param blogCategoryId
+     * @param blogTags
+     * @param blogContent
+     * @param blogCoverImage
+     * @param blogStatus
+     * @param enableComment
+     * @return
+     */
     @PostMapping("/blogs/update")
     @ResponseBody
     public Result update(@RequestParam("blogId") Long blogId,
@@ -207,13 +254,18 @@ public class BlogController {
         blog.setBlogStatus(blogStatus);
         blog.setEnableComment(enableComment);
         String updateBlogResult = blogService.updateBlog(blog);
-        if ("success".equals(updateBlogResult)) {
+        if (Constants.SUCCESS.equals(updateBlogResult)) {
             return ResultGenerator.genSuccessResult("修改成功");
         } else {
             return ResultGenerator.genFailResult(updateBlogResult);
         }
     }
 
+    /**
+     * 批量删除文章
+     * @param ids
+     * @return
+     */
     @PostMapping("/blogs/delete")
     @ResponseBody
     public Result delete(@RequestBody Integer[] ids) {

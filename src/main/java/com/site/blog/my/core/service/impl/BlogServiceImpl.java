@@ -41,6 +41,7 @@ public class BlogServiceImpl implements BlogService {
     @Override
     @Transactional
     public String saveBlog(Blog blog) {
+
         BlogCategory blogCategory = categoryMapper.selectByPrimaryKey(blog.getBlogCategoryId());
         if (blogCategory == null) {
             blog.setBlogCategoryId(0);

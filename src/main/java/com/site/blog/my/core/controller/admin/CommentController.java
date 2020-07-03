@@ -21,6 +21,17 @@ public class CommentController {
     private CommentService commentService;
 
     /**
+     * 页面跳转
+     * @param request
+     * @return
+     */
+    @GetMapping("/comments")
+    public String list(HttpServletRequest request) {
+        request.setAttribute("path", "comments");
+        return "admin/comment";
+    }
+
+    /**
      * 评论列表
      */
     @GetMapping("/comments/list")
@@ -33,6 +44,11 @@ public class CommentController {
         return ResultGenerator.genSuccessResult(commentService.getCommentsPage(pageUtil));
     }
 
+    /**
+     * 批量评论审核
+     * @param ids
+     * @return
+     */
     @PostMapping("/comments/checkDone")
     @ResponseBody
     public Result checkDone(@RequestBody Integer[] ids) {
@@ -46,6 +62,12 @@ public class CommentController {
         }
     }
 
+    /**
+     * 评论回复
+     * @param commentId
+     * @param replyBody
+     * @return
+     */
     @PostMapping("/comments/reply")
     @ResponseBody
     public Result checkDone(@RequestParam("commentId") Long commentId,
@@ -60,6 +82,11 @@ public class CommentController {
         }
     }
 
+    /**
+     * 批量删除评论
+     * @param ids
+     * @return
+     */
     @PostMapping("/comments/delete")
     @ResponseBody
     public Result delete(@RequestBody Integer[] ids) {
@@ -71,12 +98,6 @@ public class CommentController {
         } else {
             return ResultGenerator.genFailResult("刪除失败");
         }
-    }
-
-    @GetMapping("/comments")
-    public String list(HttpServletRequest request) {
-        request.setAttribute("path", "comments");
-        return "admin/comment";
     }
 
 
