@@ -49,16 +49,18 @@ public class AdminController {
                         @RequestParam("password") String password,
                         @RequestParam("verifyCode") String verifyCode,
                         HttpSession session) {
-        //判断验证码是否正确
+        //验证码是存放在前端存放到session中的，后端取出来进行判断验证码是否正确
         if (StringUtils.isEmpty(verifyCode)) {
             session.setAttribute("errorMsg", "验证码不能为空");
             return "admin/login";
         }
+
         //判断用户名和密码是否为空
         if (StringUtils.isEmpty(userName) || StringUtils.isEmpty(password)) {
             session.setAttribute("errorMsg", "用户名或密码不能为空");
             return "admin/login";
         }
+
         // 在前端的时候放入的session,后端可以从session中取出验证码 ，进行验证
         String kaptchaCode = session.getAttribute("verifyCode") + "";
         //判断验证码是否为空 或者 是否正确
@@ -68,6 +70,7 @@ public class AdminController {
         }
         // 拿着用户名和密码到数据库查找该用户
         AdminUser adminUser = adminUserService.login(userName, password);
+
         // 如果用户存在，存入session当中，并设置session有效期 ，否则登录失败
         if (adminUser != null) {
             //放入session当中

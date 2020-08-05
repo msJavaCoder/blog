@@ -17,7 +17,6 @@ public class PatternUtil {
 
     /**
      * 验证只包含中英文和数字的字符串
-     *
      * @param keyword
      * @return
      */
@@ -30,7 +29,6 @@ public class PatternUtil {
 
     /**
      * 判断是否是邮箱
-     *
      * @param emailStr
      * @return
      */
@@ -41,7 +39,6 @@ public class PatternUtil {
 
     /**
      * 判断是否是网址
-     *
      * @param urlString
      * @return
      */

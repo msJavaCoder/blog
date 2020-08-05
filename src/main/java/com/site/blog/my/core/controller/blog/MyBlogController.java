@@ -1,7 +1,9 @@
 package com.site.blog.my.core.controller.blog;
 
 import com.site.blog.my.core.controller.vo.BlogDetailVO;
+import com.site.blog.my.core.controller.vo.SimpleBlogListVO;
 import com.site.blog.my.core.entity.BlogComment;
+import com.site.blog.my.core.entity.BlogTagCount;
 import com.site.blog.my.core.service.BlogService;
 import com.site.blog.my.core.service.CommentService;
 import com.site.blog.my.core.service.TagService;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
+
 @Controller
 public class MyBlogController {
 
@@ -44,11 +48,20 @@ public class MyBlogController {
         if (blogPageResult == null) {
             return "error/error_404";
         }
+        //文章列表
         request.setAttribute("blogPageResult", blogPageResult);
-        request.setAttribute("newBlogs", blogService.getBlogListForIndexPage(1));
-        request.setAttribute("hotBlogs", blogService.getBlogListForIndexPage(0));
-        request.setAttribute("hotTags", tagService.getBlogTagCountForIndex());
+        //最新发布
+        List<SimpleBlogListVO> newBlogs = blogService.getBlogListForIndexPage(1);
+        request.setAttribute("newBlogs", newBlogs);
+        //最多点击
+        List<SimpleBlogListVO> hotBlogs = blogService.getBlogListForIndexPage(0);
+        request.setAttribute("hotBlogs",hotBlogs);
+        //标签栏
+        List<BlogTagCount> hotTags = tagService.getBlogTagCountForIndex();
+        request.setAttribute("hotTags", hotTags);
+        //首页
         request.setAttribute("pageName", "首页");
+
         return "blog/index";
     }
 
@@ -191,6 +204,7 @@ public class MyBlogController {
         if (PatternUtil.isURL(websiteUrl)) {
             comment.setWebsiteUrl(websiteUrl);
         }
+
         comment.setCommentBody(MyBlogUtils.cleanString(commentBody));
         return ResultGenerator.genSuccessResult(commentService.addComment(comment));
     }

@@ -12,7 +12,9 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-
+/**
+ *  后台评论管理
+ */
 @Controller
 @RequestMapping("/admin")
 public class CommentController {
@@ -37,6 +39,7 @@ public class CommentController {
     @GetMapping("/comments/list")
     @ResponseBody
     public Result list(@RequestParam Map<String, Object> params) {
+
         if (StringUtils.isEmpty(params.get("page")) || StringUtils.isEmpty(params.get("limit"))) {
             return ResultGenerator.genFailResult("参数异常！");
         }

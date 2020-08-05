@@ -48,8 +48,15 @@ public class CommentServiceImpl implements CommentService {
         return blogCommentMapper.deleteBatch(ids) > 0;
     }
 
+    /**
+     *
+     * @param commentId    评论id
+     * @param replyBody   回复的内容
+     * @return
+     */
     @Override
     public Boolean reply(Long commentId, String replyBody) {
+        //根据commentId查询到评论内容
         BlogComment blogComment = blogCommentMapper.selectByPrimaryKey(commentId);
         //blogComment不为空且状态为已审核，则继续后续操作
         if (blogComment != null && blogComment.getCommentStatus().intValue() == 1) {

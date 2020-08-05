@@ -3,6 +3,7 @@ package com.site.blog.my.core.controller.admin;
 import com.site.blog.my.core.entity.BlogCategory;
 import com.site.blog.my.core.service.CategoryService;
 import com.site.blog.my.core.util.PageQueryUtil;
+import com.site.blog.my.core.util.PageResult;
 import com.site.blog.my.core.util.Result;
 import com.site.blog.my.core.util.ResultGenerator;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,9 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-
+/**
+ *  后台分类管理
+ */
 @Controller
 @RequestMapping("/admin")
 public class CategoryController {
@@ -21,6 +24,11 @@ public class CategoryController {
     @Resource
     private CategoryService categoryService;
 
+    /**
+     *  页面跳转
+     * @param request
+     * @return
+     */
     @GetMapping("/categories")
     public String categoryPage(HttpServletRequest request) {
         request.setAttribute("path", "categories");
@@ -30,20 +38,21 @@ public class CategoryController {
     /**
      * 分类列表
      */
-    @RequestMapping(value = "/categories/list", method = RequestMethod.GET)
+    @GetMapping("/categories/list")
     @ResponseBody
     public Result list(@RequestParam Map<String, Object> params) {
         if (StringUtils.isEmpty(params.get("page")) || StringUtils.isEmpty(params.get("limit"))) {
             return ResultGenerator.genFailResult("参数异常！");
         }
         PageQueryUtil pageUtil = new PageQueryUtil(params);
-        return ResultGenerator.genSuccessResult(categoryService.getBlogCategoryPage(pageUtil));
+        PageResult blogCategoryPage = categoryService.getBlogCategoryPage(pageUtil);
+        return ResultGenerator.genSuccessResult(blogCategoryPage);
     }
 
     /**
      * 分类添加
      */
-    @RequestMapping(value = "/categories/save", method = RequestMethod.POST)
+    @PostMapping("/categories/save")
     @ResponseBody
     public Result save(@RequestParam("categoryName") String categoryName,
                        @RequestParam("categoryIcon") String categoryIcon) {
@@ -53,7 +62,8 @@ public class CategoryController {
         if (StringUtils.isEmpty(categoryIcon)) {
             return ResultGenerator.genFailResult("请选择分类图标！");
         }
-        if (categoryService.saveCategory(categoryName, categoryIcon)) {
+        Boolean category = categoryService.saveCategory(categoryName, categoryIcon);
+        if (category) {
             return ResultGenerator.genSuccessResult();
         } else {
             return ResultGenerator.genFailResult("分类名称重复");
@@ -64,7 +74,7 @@ public class CategoryController {
     /**
      * 分类修改
      */
-    @RequestMapping(value = "/categories/update", method = RequestMethod.POST)
+    @PostMapping("/categories/update")
     @ResponseBody
     public Result update(@RequestParam("categoryId") Integer categoryId,
                          @RequestParam("categoryName") String categoryName,
@@ -101,7 +111,7 @@ public class CategoryController {
     /**
      * 分类删除
      */
-    @RequestMapping(value = "/categories/delete", method = RequestMethod.POST)
+    @PostMapping("/categories/delete")
     @ResponseBody
     public Result delete(@RequestBody Integer[] ids) {
         if (ids.length < 1) {

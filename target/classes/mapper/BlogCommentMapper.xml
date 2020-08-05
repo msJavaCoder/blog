@@ -46,16 +46,19 @@
             AND comment_status = #{commentStatus}
         </if>
     </select>
+
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from tb_blog_comment
         where comment_id = #{commentId,jdbcType=BIGINT} and is_deleted=0
     </select>
+
     <update id="deleteByPrimaryKey" parameterType="java.lang.Long">
     update tb_blog_comment set is_deleted=1
     where comment_id = #{commentId,jdbcType=BIGINT} and is_deleted=0
   </update>
+
     <update id="checkDone">
         update tb_blog_comment
         set comment_status=1 where comment_id in
@@ -64,6 +67,7 @@
         </foreach>
         and comment_status = 0
     </update>
+
     <update id="deleteBatch">
         update tb_blog_comment
         set is_deleted=1 where comment_id in
@@ -71,6 +75,7 @@
             #{id}
         </foreach>
     </update>
+
     <insert id="insert" parameterType="com.site.blog.my.core.entity.BlogComment">
     insert into tb_blog_comment (comment_id, blog_id, commentator, 
       email, website_url, comment_body, 
@@ -83,6 +88,7 @@
       #{replyCreateTime,jdbcType=TIMESTAMP}, #{commentStatus,jdbcType=TINYINT}, #{isDeleted,jdbcType=TINYINT}
       )
   </insert>
+
     <insert id="insertSelective" parameterType="com.site.blog.my.core.entity.BlogComment">
         insert into tb_blog_comment
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -216,4 +222,6 @@
       is_deleted = #{isDeleted,jdbcType=TINYINT}
     where comment_id = #{commentId,jdbcType=BIGINT}
   </update>
+
+
 </mapper>

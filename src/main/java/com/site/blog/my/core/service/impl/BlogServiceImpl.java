@@ -38,6 +38,12 @@ public class BlogServiceImpl implements BlogService {
     @Autowired
     private BlogTagRelationMapper blogTagRelationMapper;
 
+
+    /**
+     *  保存文章
+     * @param blog
+     * @return
+     */
     @Override
     @Transactional
     public String saveBlog(Blog blog) {
@@ -100,6 +106,11 @@ public class BlogServiceImpl implements BlogService {
         return blogMapper.selectByPrimaryKey(blogId);
     }
 
+    /**
+     * 更新文章
+     * @param blog
+     * @return
+     */
     @Override
     @Transactional
     public String updateBlog(Blog blog) {
@@ -107,12 +118,14 @@ public class BlogServiceImpl implements BlogService {
         if (blogForUpdate == null) {
             return "数据不存在";
         }
+        //设置文章信息
         blogForUpdate.setBlogTitle(blog.getBlogTitle());
         blogForUpdate.setBlogSubUrl(blog.getBlogSubUrl());
         blogForUpdate.setBlogContent(blog.getBlogContent());
         blogForUpdate.setBlogCoverImage(blog.getBlogCoverImage());
         blogForUpdate.setBlogStatus(blog.getBlogStatus());
         blogForUpdate.setEnableComment(blog.getEnableComment());
+
         BlogCategory blogCategory = categoryMapper.selectByPrimaryKey(blog.getBlogCategoryId());
         if (blogCategory == null) {
             blogForUpdate.setBlogCategoryId(0);
@@ -181,10 +194,17 @@ public class BlogServiceImpl implements BlogService {
         return blogMapper.deleteBatch(ids) > 0;
     }
 
+    /**
+     * 首页侧边栏数据列表
+     * 0-点击最多 1-最新发布
+     * @param type
+     * @return
+     */
     @Override
     public List<SimpleBlogListVO> getBlogListForIndexPage(int type) {
+
         List<SimpleBlogListVO> simpleBlogListVOS = new ArrayList<>();
-        List<Blog> blogs = blogMapper.findBlogListByType(type, 9);
+        List<Blog> blogs = blogMapper.findBlogListByType(type, 8);
         if (!CollectionUtils.isEmpty(blogs)) {
             for (Blog blog : blogs) {
                 SimpleBlogListVO simpleBlogListVO = new SimpleBlogListVO();
@@ -277,7 +297,9 @@ public class BlogServiceImpl implements BlogService {
      * 数据填充
      */
     private List<BlogListVO> getBlogListVOsByBlogs(List<Blog> blogList) {
+
         List<BlogListVO> blogListVOS = new ArrayList<>();
+
         if (!CollectionUtils.isEmpty(blogList)) {
             List<Integer> categoryIds = blogList.stream().map(Blog::getBlogCategoryId).collect(Collectors.toList());
             Map<Integer, String> blogCategoryMap = new HashMap<>();

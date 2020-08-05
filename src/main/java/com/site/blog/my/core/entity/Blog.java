@@ -23,6 +23,7 @@ public class Blog {
 
     private Byte blogStatus;
 
+    //浏览量
     private Long blogViews;
 
     private Byte enableComment;

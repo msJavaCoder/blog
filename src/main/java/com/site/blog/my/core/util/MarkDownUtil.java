@@ -12,7 +12,6 @@ import java.util.Arrays;
 public class MarkDownUtil {
     /**
      * 转换md格式为html
-     *
      * @param markdownString
      * @return
      */
