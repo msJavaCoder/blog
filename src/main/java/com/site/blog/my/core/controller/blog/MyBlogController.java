@@ -27,9 +27,10 @@ public class MyBlogController {
     @Resource
     private CommentService commentService;
 
+
+
     /**
      * 首页(取第一页数据)
-     *
      * @return
      */
     @GetMapping({"/", "/index", "index.html"})
@@ -43,7 +44,8 @@ public class MyBlogController {
      * @return
      */
     @GetMapping({"/page/{pageNum}"})
-    public String page(HttpServletRequest request, @PathVariable("pageNum") int pageNum) {
+    public String page(HttpServletRequest request,
+                       @PathVariable("pageNum") int pageNum) {
         PageResult blogPageResult = blogService.getBlogsForIndexPage(pageNum);
         if (blogPageResult == null) {
             return "error/error_404";
@@ -77,11 +79,12 @@ public class MyBlogController {
 
     /**
      * 搜索列表页
-     *
      * @return
      */
     @GetMapping({"/search/{keyword}/{page}"})
-    public String search(HttpServletRequest request, @PathVariable("keyword") String keyword, @PathVariable("page") Integer page) {
+    public String search(HttpServletRequest request,
+                         @PathVariable("keyword") String keyword,
+                         @PathVariable("page") Integer page) {
         PageResult blogPageResult = blogService.getBlogsPageBySearch(keyword, page);
         request.setAttribute("blogPageResult", blogPageResult);
         request.setAttribute("pageName", "搜索");
@@ -92,7 +95,6 @@ public class MyBlogController {
 
     /**
      * 标签列表页
-     *
      * @return
      */
     @GetMapping({"/tag/{tagName}"})
@@ -102,7 +104,6 @@ public class MyBlogController {
 
     /**
      * 标签列表页
-     *
      * @return
      */
     @GetMapping({"/tag/{tagName}/{page}"})
@@ -117,7 +118,6 @@ public class MyBlogController {
 
     /**
      * 分类列表页
-     *
      * @return
      */
     @GetMapping({"/category/{categoryName}"})
@@ -127,7 +127,6 @@ public class MyBlogController {
 
     /**
      * 分类列表页
-     *
      * @return
      */
     @GetMapping({"/category/{categoryName}/{page}"})
@@ -142,7 +141,6 @@ public class MyBlogController {
 
     /**
      * 详情页
-     *
      * @return
      */
     @GetMapping("/blog/{blogId}")
