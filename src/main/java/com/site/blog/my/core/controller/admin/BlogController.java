@@ -118,6 +118,7 @@ public class BlogController {
         if (StringUtils.isEmpty(blogTitle)) {
             return ResultGenerator.genFailResult("请输入文章标题");
         }
+
         if (blogTitle.trim().length() > 150) {
             return ResultGenerator.genFailResult("标题过长");
         }
@@ -149,7 +150,7 @@ public class BlogController {
         blog.setBlogStatus(blogStatus);
         blog.setEnableComment(enableComment);
         String saveBlogResult = blogService.saveBlog(blog);
-        if (Constants.SUCCESS.equals(saveBlogResult)) {
+        if (saveBlogResult.equals("success")) {
             return ResultGenerator.genSuccessResult("添加成功");
         } else {
             return ResultGenerator.genFailResult(saveBlogResult);

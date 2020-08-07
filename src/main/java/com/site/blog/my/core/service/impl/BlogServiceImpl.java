@@ -94,7 +94,9 @@ public class BlogServiceImpl implements BlogService {
                 blogTagRelation.setTagId(tag.getTagId());
                 blogTagRelations.add(blogTagRelation);
             }
-            if (blogTagRelationMapper.batchInsert(blogTagRelations) > 0) {
+            int row = blogTagRelationMapper.batchInsert(blogTagRelations);
+
+            if (row > 0) {
                 return "success";
             }
         }
@@ -105,6 +107,8 @@ public class BlogServiceImpl implements BlogService {
     public Blog getBlogById(Long blogId) {
         return blogMapper.selectByPrimaryKey(blogId);
     }
+
+
 
     /**
      * 更新文章
