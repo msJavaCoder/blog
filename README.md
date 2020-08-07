@@ -1,5 +1,28 @@
 # SpringBoot+Mybatis+MySQL+Thymeleaf 搭建个人博客网站
 
+## 0. 技术应用
+
+- Spring Boot 静态资源
+-  Spring Boot 开发 web 项目
+-  Spring Boot 整合 Thymeleaf 流程
+-  Spring Boot 文件上传
+-  Spring Boot 整合 MyBatis
+-  Spring Boot 事务处理
+-  RESTful api 设计规范
+-  AdminLTE3 模板整合
+-  自定义错误页面
+-  Editormd 编辑器介绍及整合
+
+-  Spring Boot 消息转换器
+-  Thymeleaf 
+-  Spring Boot 连接 MySQL 流程
+-  Mybatis-Generator 自动生成代码
+-  Ajax 调用接口实践
+-  SpringBoot 整合 kaptcha 验证码生成
+-  JqGrid 分页组件整合
+-  Spring Boot 中使用拦截器
+-  jar 包和 war 包部署
+
 ## 1. 数据库设计
 
 ### 1.1 管理员表`tb_admin_user`
@@ -111,5 +134,39 @@ CREATE TABLE `tb_link` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 ```
 
+## 2. 运行截图（部分）
 
+### 2.1 登录页面
 
+![image-20200807213316307](C:\Users\孙白胖的爸爸\AppData\Roaming\Typora\typora-user-images\image-20200807213316307.png)
+
+### 2.2 后台首页
+
+![image-20200807213358672](C:\Users\孙白胖的爸爸\AppData\Roaming\Typora\typora-user-images\image-20200807213358672.png)
+
+### 2.3  发布文章
+
+![image-20200807213432143](C:\Users\孙白胖的爸爸\AppData\Roaming\Typora\typora-user-images\image-20200807213432143.png)
+
+### 2.4  前台首页
+
+![image-20200807213536326](C:\Users\孙白胖的爸爸\AppData\Roaming\Typora\typora-user-images\image-20200807213536326.png)
+
+## 3. 项目部署
+
+### 3.1 开发环境
+
+1. SpringBoot 
+2. JDK 1.8
+3. IDE Idea 
+4. Maven 
+5. MySQL
+6. lombok插件
+
+### 3.2 部署流程
+
+- 下载项目源码 ： `git@github.com:msJavaCoder/blog.git`
+- IDE Idea 开发项目源码
+- 创建数据库并导入sql文件（文件在项目源码sql文件里面）
+- 修改配置文件的数据库连接信息
+- 启动项目 
