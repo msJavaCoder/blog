@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.site.blog.my.core.mapper.BlogMapper">
-    <resultMap id="BaseResultMap" type="com.site.blog.my.core.entity.Blog">
+<mapper namespace="cn.msjava.blog.mapper.BlogMapper">
+    <resultMap id="BaseResultMap" type="cn.msjava.blog.entity.Blog">
         <id column="blog_id" jdbcType="BIGINT" property="blogId"/>
         <result column="blog_title" jdbcType="VARCHAR" property="blogTitle"/>
         <result column="blog_sub_url" jdbcType="VARCHAR" property="blogSubUrl"/>
@@ -16,7 +16,7 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
-    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.site.blog.my.core.entity.Blog">
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.msjava.blog.entity.Blog">
         <result column="blog_content" jdbcType="LONGVARCHAR" property="blogContent"/>
     </resultMap>
     <sql id="Base_Column_List">
@@ -69,7 +69,7 @@
             AND blog_category_id = #{blogCategoryId}
         </if>
     </select>
-    <insert id="insert" parameterType="com.site.blog.my.core.entity.Blog">
+    <insert id="insert" parameterType="cn.msjava.blog.entity.Blog">
     insert into tb_blog (blog_id, blog_title, blog_sub_url, 
       blog_cover_image, blog_category_id, blog_category_name, 
       blog_tags, blog_status, blog_views, 
@@ -82,7 +82,7 @@
       #{updateTime,jdbcType=TIMESTAMP}, #{blogContent,jdbcType=LONGVARCHAR})
   </insert>
     <insert id="insertSelective" useGeneratedKeys="true" keyProperty="blogId"
-            parameterType="com.site.blog.my.core.entity.Blog">
+            parameterType="cn.msjava.blog.entity.Blog">
         insert into tb_blog
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="blogId != null">
@@ -173,7 +173,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.site.blog.my.core.entity.Blog">
+    <update id="updateByPrimaryKeySelective" parameterType="cn.msjava.blog.entity.Blog">
         update tb_blog
         <set>
             <if test="blogTitle != null">
@@ -221,7 +221,7 @@
         </set>
         where blog_id = #{blogId,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.site.blog.my.core.entity.Blog">
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.msjava.blog.entity.Blog">
     update tb_blog
     set blog_title = #{blogTitle,jdbcType=VARCHAR},
       blog_sub_url = #{blogSubUrl,jdbcType=VARCHAR},
@@ -238,7 +238,7 @@
       blog_content = #{blogContent,jdbcType=LONGVARCHAR}
     where blog_id = #{blogId,jdbcType=BIGINT}
   </update>
-    <update id="updateByPrimaryKey" parameterType="com.site.blog.my.core.entity.Blog">
+    <update id="updateByPrimaryKey" parameterType="cn.msjava.blog.entity.Blog">
     update tb_blog
     set blog_title = #{blogTitle,jdbcType=VARCHAR},
       blog_sub_url = #{blogSubUrl,jdbcType=VARCHAR},
