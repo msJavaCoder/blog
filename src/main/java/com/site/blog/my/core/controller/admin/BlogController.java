@@ -70,6 +70,7 @@ public class BlogController {
     @GetMapping("/blogs/edit")
     public String edit(HttpServletRequest request) {
         request.setAttribute("path", "edit");
+        // 先把文章分类查询出来放到request域当中
         request.setAttribute("categories", categoryService.getAllCategories());
         return "admin/edit";
     }
@@ -94,7 +95,7 @@ public class BlogController {
     }
 
     /**
-     * 保存文章
+     * 发布文章
      * @param blogTitle
      * @param blogSubUrl
      * @param blogCategoryId
@@ -255,7 +256,7 @@ public class BlogController {
         blog.setBlogStatus(blogStatus);
         blog.setEnableComment(enableComment);
         String updateBlogResult = blogService.updateBlog(blog);
-        if (Constants.SUCCESS.equals(updateBlogResult)) {
+        if (updateBlogResult.equals("success")) {
             return ResultGenerator.genSuccessResult("修改成功");
         } else {
             return ResultGenerator.genFailResult(updateBlogResult);
