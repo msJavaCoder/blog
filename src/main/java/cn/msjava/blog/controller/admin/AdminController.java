@@ -2,6 +2,7 @@ package cn.msjava.blog.controller.admin;
 
 import cn.msjava.blog.entity.AdminUser;
 import cn.msjava.blog.service.AdminUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -15,12 +16,12 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/admin")
 public class AdminController {
 
-    @Resource
+    @Autowired
     private AdminUserService adminUserService;
 
     /**
-     *
      * 页面跳转
+     *
      * @return
      */
     @GetMapping({"", "/", "/index", "/index.html"})
@@ -30,16 +31,19 @@ public class AdminController {
 
     /**
      * 页面跳转
-     * @return  admin/login
+     *
+     * @return admin/login
      */
     @GetMapping({"/login"})
     public String login() {
         return "admin/login";
     }
+
     /**
-     *  用户登录
-     * @param userName  用户名
-     * @param password  密码
+     * 用户登录
+     *
+     * @param userName   用户名
+     * @param password   密码
      * @param verifyCode 验证码
      * @param session
      * @return
@@ -88,7 +92,8 @@ public class AdminController {
 
 
     /**
-     *  用户名 、 昵称 修改
+     * 用户名 、 昵称 修改
+     *
      * @param request
      * @return
      */
@@ -101,7 +106,6 @@ public class AdminController {
         if (adminUser == null) {
             return "admin/login";
         }
-
         request.setAttribute("path", "profile");
         request.setAttribute("loginUserName", adminUser.getLoginUserName());
         request.setAttribute("nickName", adminUser.getNickName());
@@ -110,9 +114,10 @@ public class AdminController {
 
     /**
      * 修改密码
+     *
      * @param request
-     * @param originalPassword   旧密码
-     * @param newPassword   新密码
+     * @param originalPassword 旧密码
+     * @param newPassword      新密码
      * @return
      */
     @PostMapping("/profile/password")
@@ -137,6 +142,7 @@ public class AdminController {
 
     /**
      * 修改用户名 和 昵称
+     *
      * @param request
      * @param loginUserName
      * @param nickName
@@ -160,6 +166,7 @@ public class AdminController {
 
     /**
      * 退出登录
+     *
      * @param request
      * @return
      */

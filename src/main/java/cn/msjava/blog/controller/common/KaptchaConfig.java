@@ -7,6 +7,9 @@ import com.google.code.kaptcha.util.Config;
 
 import java.util.Properties;
 
+/**
+ * 验证码生成 参数配置
+ */
 @Component
 public class KaptchaConfig {
     @Bean

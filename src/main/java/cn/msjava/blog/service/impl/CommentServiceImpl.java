@@ -21,7 +21,6 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Boolean addComment(BlogComment blogComment) {
-
         return blogCommentMapper.insertSelective(blogComment) > 0;
     }
 

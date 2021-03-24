@@ -6,6 +6,7 @@ import cn.msjava.blog.util.PageQueryUtil;
 import cn.msjava.blog.util.PageResult;
 import cn.msjava.blog.util.Result;
 import cn.msjava.blog.util.ResultGenerator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ import java.util.Map;
 @RequestMapping("/admin")
 public class CategoryController {
 
-    @Resource
+    @Autowired
     private CategoryService categoryService;
 
     /**

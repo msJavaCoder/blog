@@ -133,28 +133,9 @@ CREATE TABLE `tb_link` (
   PRIMARY KEY (`link_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 ```
+## 2. 项目部署
 
-## 2. 运行截图（部分）
-
-### 2.1 登录页面
-
-![image-20200807213316307](C:\Users\孙白胖的爸爸\AppData\Roaming\Typora\typora-user-images\image-20200807213316307.png)
-
-### 2.2 后台首页
-
-![image-20200807213358672](C:\Users\孙白胖的爸爸\AppData\Roaming\Typora\typora-user-images\image-20200807213358672.png)
-
-### 2.3  发布文章
-
-![image-20200807213432143](C:\Users\孙白胖的爸爸\AppData\Roaming\Typora\typora-user-images\image-20200807213432143.png)
-
-### 2.4  前台首页
-
-![image-20200807213536326](C:\Users\孙白胖的爸爸\AppData\Roaming\Typora\typora-user-images\image-20200807213536326.png)
-
-## 3. 项目部署
-
-### 3.1 开发环境
+### 2.1 开发环境
 
 1. SpringBoot 
 2. JDK 1.8
@@ -163,7 +144,7 @@ CREATE TABLE `tb_link` (
 5. MySQL
 6. lombok插件
 
-### 3.2 部署流程
+### 2.2 部署流程
 
 - 下载项目源码 ： `git@github.com:msJavaCoder/blog.git`
 - IDE Idea 开发项目源码

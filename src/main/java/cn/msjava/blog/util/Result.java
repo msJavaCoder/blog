@@ -3,6 +3,11 @@ package cn.msjava.blog.util;
 import lombok.Data;
 
 import java.io.Serializable;
+
+/**
+ * 统一返回对象
+ * @param <T>
+ */
 @Data
 public class Result<T> implements Serializable {
     private static final long serialVersionUID = 1L;

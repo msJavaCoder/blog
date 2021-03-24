@@ -15,6 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
+/**
+ * 错误页面
+ */
 @Controller
 public class ErrorPageController implements ErrorController {
 

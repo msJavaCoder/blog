@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class AdminUser {
+
     private Integer adminUserId;
 
     private String loginUserName;
