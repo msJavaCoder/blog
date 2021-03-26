@@ -11,7 +11,9 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-
+/**
+ * 后台管理员相关操作
+ */
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -40,7 +42,7 @@ public class AdminController {
     }
 
     /**
-     * 用户登录
+     * 管理员用户登录
      *
      * @param userName   用户名
      * @param password   密码
@@ -92,7 +94,7 @@ public class AdminController {
 
 
     /**
-     * 用户名 、 昵称 修改
+     * 管理员用户名 、 昵称 修改
      *
      * @param request
      * @return
@@ -128,6 +130,7 @@ public class AdminController {
         if (StringUtils.isEmpty(originalPassword) || StringUtils.isEmpty(newPassword)) {
             return "输入的参数均不能为空哦";
         }
+        // 从session 中取出用户ID
         Integer loginUserId = (int) request.getSession().getAttribute("loginUserId");
         if (adminUserService.updatePassword(loginUserId, originalPassword, newPassword)) {
             //修改成功后清空session之前的用户数据，前端控制跳转至登录页

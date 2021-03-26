@@ -118,9 +118,10 @@ public class BlogServiceImpl implements BlogService {
     @Override
     @Transactional
     public String updateBlog(Blog blog) {
+        // 根据文章ID查找是否存在
         Blog blogForUpdate = blogMapper.selectByPrimaryKey(blog.getBlogId());
         if (blogForUpdate == null) {
-            return "数据不存在";
+            return "文章不存在,修改失败";
         }
         //设置文章信息
         blogForUpdate.setBlogTitle(blog.getBlogTitle());
@@ -129,7 +130,7 @@ public class BlogServiceImpl implements BlogService {
         blogForUpdate.setBlogCoverImage(blog.getBlogCoverImage());
         blogForUpdate.setBlogStatus(blog.getBlogStatus());
         blogForUpdate.setEnableComment(blog.getEnableComment());
-
+        // 根据文章分类ID 查找分类是否存在 ,如果不存在设置默认分类
         BlogCategory blogCategory = categoryMapper.selectByPrimaryKey(blog.getBlogCategoryId());
         if (blogCategory == null) {
             blogForUpdate.setBlogCategoryId(0);
