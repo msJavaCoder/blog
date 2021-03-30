@@ -27,6 +27,11 @@ public class TagController {
         return "admin/tag";
     }
 
+    /**
+     * 标签列表
+     * @param params
+     * @return
+     */
     @GetMapping("/tags/list")
     @ResponseBody
     public Result list(@RequestParam Map<String, Object> params) {
@@ -38,6 +43,11 @@ public class TagController {
     }
 
 
+    /**
+     * 新增标签
+     * @param tagName
+     * @return
+     */
     @PostMapping("/tags/save")
     @ResponseBody
     public Result save(@RequestParam("tagName") String tagName) {
@@ -51,6 +61,11 @@ public class TagController {
         }
     }
 
+    /**
+     * 删除标签
+     * @param ids
+     * @return
+     */
     @PostMapping("/tags/delete")
     @ResponseBody
     public Result delete(@RequestBody Integer[] ids) {

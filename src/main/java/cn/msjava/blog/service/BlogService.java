@@ -10,6 +10,12 @@ import java.util.List;
 
 public interface BlogService {
 
+
+    /**
+     * 发布文章
+     * @param blog
+     * @return
+     */
     String saveBlog(Blog blog);
 
     /**
