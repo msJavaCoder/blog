@@ -2,6 +2,7 @@ package cn.msjava.blog.controller.admin;
 
 import cn.msjava.blog.entity.AdminUser;
 import cn.msjava.blog.service.AdminUserService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -49,6 +50,7 @@ public class AdminController {
      * @return
      */
     @PostMapping(value = "/login")
+    @ApiOperation("管理员登录")
     public String login(@RequestParam("userName") String userName,
                         @RequestParam("password") String password,
                         @RequestParam("verifyCode") String verifyCode,
@@ -98,6 +100,7 @@ public class AdminController {
      * @return
      */
     @GetMapping("/profile")
+    @ApiOperation("用户名昵称修改")
     public String profile(HttpServletRequest request) {
         //先到session 中取出这个用户id
         Integer loginUserId = (int) request.getSession().getAttribute("loginUserId");
@@ -122,6 +125,7 @@ public class AdminController {
      */
     @PostMapping("/profile/password")
     @ResponseBody
+    @ApiOperation("管理员用户密码修改")
     public String passwordUpdate(HttpServletRequest request, @RequestParam("originalPassword") String originalPassword,
                                  @RequestParam("newPassword") String newPassword) {
         //判断一下用户名、密码是否为空
